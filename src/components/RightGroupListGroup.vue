@@ -46,18 +46,27 @@ const props = defineProps<{
 }>()
 
 
+interface CubeWithGroupItem extends Cube {
+    groupItem: GroupItem
+    sort?: number
+}
+
+interface GroupItemWithCubes extends GroupItem {
+    cubes:CubeWithGroupItem[]
+}
+
 const cubes = () => {
-    const _cubes: Cube[] = [
+    const _cubes: CubeWithGroupItem[] = [
     ]
     props.group.items.forEach(item => {
         for (let i = 0; i < item.amount; i++) {
             if (!item.checked) {
                 continue
             }
-            let cube: Cube = {
+            let cube: CubeWithGroupItem = {
                 color: item.color,
                 sort: Math.random(),
-                groupItem: item
+                groupItem:item
             }
             _cubes.push(cube)
         }
@@ -68,16 +77,16 @@ const cubes = () => {
 }
 
 const groupItems = computed(() => {
-    const _groupItems: GroupItem[] = [
+    const _groupItems: GroupItemWithCubes[] = [
     ]
     props.group.items.forEach(item => {
         const _item = JSON.parse(JSON.stringify(item))
-        let _cubes = []
+        let _cubes: CubeWithGroupItem[] = []
         if (!item.checked) {
             return
         }
         for (let i = 0; i < item.amount; i++) {
-            let cube: Cube = {
+            let cube: CubeWithGroupItem = {
                 id: Date.now(),
                 color: item.color,
                 groupItem: item

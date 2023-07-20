@@ -2,8 +2,8 @@
 export interface Cube {
     id?: any
     color: string
-    sort?:number
-    groupItem?:GroupItem
+    // sort?:number
+    // groupItem?:GroupItem
 }
 
 export interface GroupItem {
@@ -11,7 +11,7 @@ export interface GroupItem {
     color: string
     checked: boolean | undefined
     amount: number
-    cubes?:Cube[]
+    // cubes?:Cube[]
 }
 
 export interface Group {
@@ -19,7 +19,7 @@ export interface Group {
     checked: boolean | undefined
 
     items: GroupItem[]
-    mixedItems?: Cube[]
+    // mixedItems?: Cube[]
 
     isMixed: boolean
 }
