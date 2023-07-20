@@ -36,6 +36,7 @@
 import type { Cube, Group, GroupItem } from '@/types';
 import { computed } from 'vue';
 import SmallItem from './SmallItem.vue';
+import { v4 } from "uuid"
 
 defineEmits<
     (event: "decrementGroupItem", groupItem: GroupItem) => void
@@ -52,7 +53,7 @@ interface CubeWithGroupItem extends Cube {
 }
 
 interface GroupItemWithCubes extends GroupItem {
-    cubes:CubeWithGroupItem[]
+    cubes: CubeWithGroupItem[]
 }
 
 const cubes = () => {
@@ -66,7 +67,7 @@ const cubes = () => {
             let cube: CubeWithGroupItem = {
                 color: item.color,
                 sort: Math.random(),
-                groupItem:item
+                groupItem: item
             }
             _cubes.push(cube)
         }
@@ -87,7 +88,7 @@ const groupItems = computed(() => {
         }
         for (let i = 0; i < item.amount; i++) {
             let cube: CubeWithGroupItem = {
-                id: Date.now(),
+                id: v4(),
                 color: item.color,
                 groupItem: item
             }
